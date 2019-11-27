@@ -11,7 +11,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 Plug 'racer-rust/vim-racer'
-Plug 'zchee/deoplete-jedi'
 " NERDTree
 Plug 'scrooloose/nerdtree'
 " Asynchronous Lint Engine
@@ -20,20 +19,12 @@ Plug 'w0rp/ale'
 Plug 'mbbill/undotree', { 'on': ['UndotreeFocus', 'UndotreeShow', 'UndotreeToggle'] }
 " Show git status in gutter.
 Plug 'airblade/vim-gitgutter'
-" Enhanced splash screen with RUFs.
-Plug 'mhinz/vim-startify'
 
 " --- Search
 " Search with rg
 Plug 'jremmen/vim-ripgrep'
 " Search with fzf
 Plug 'junegunn/fzf.vim'
-
-" --- C/C++
-" Enhanced C++ highlighting.
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-" Extra highlighting of typedefs, enumerations etc (based on ctags)
-Plug 'vim-scripts/TagHighlight', { 'for': ['c', 'cpp'] }
 
 " --- Rust
 " rust.vim
@@ -43,35 +34,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 " Pest PEG grammar syntax support
 Plug 'pest-parser/pest.vim'
 
-" --- Python
-" Vim uses current virtualenv.
-Plug 'jmcantrell/vim-virtualenv'
-" Black formatting
-Plug 'ambv/black'
-
-" --- Javascript
-" Syntax highlighting for JSON in Vim
-Plug 'elzr/vim-json', { 'for': 'json' }
-" ES6 support
-Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
-" Javascript
-Plug 'pangloss/vim-javascript'
-" JSX
-Plug 'mxw/vim-jsx'
-" Typescript
-Plug 'leafgarland/typescript-vim'
-" Prettier
-Plug 'prettier/vim-prettier'
-
 " --- txt
-" distraction-free writing
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-" paragraph highlighting for the above
-Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
-" Reveal the current file in the OS X Finder.
-Plug 'henrik/vim-reveal-in-finder'
-" Vim script for text filtering and alignment
-Plug 'godlygeek/tabular'
 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 Plug 'ctrlpvim/ctrlp.vim'
 " Decrease reliance on single-key navigation.
@@ -80,17 +43,6 @@ Plug 'takac/vim-hardtime'
 Plug 'bronson/vim-trailing-whitespace'
 " Override awful default YAML syntax highlighting
 Plug 'stephpy/vim-yaml'
-" Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-"
-" Colour schemes
-Plug 'sickill/vim-monokai'
-Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
-Plug 'joshdick/onedark.vim'
-Plug 'arcticicestudio/nord-vim'
-
 
 call plug#end()            " required
 
@@ -220,50 +172,6 @@ let g:airline_powerline_fonts=1
 let g:airline_theme = 'bubblegum'
 
 
-" ==== Startify ================================================================
-let g:ascii = [
-\ "          .;CCC CCCC`<CCC>' ,<CCCCCC>>''.;C>>'''`<CCCCCC><CCC;<C>',<CCC",
-\ "        . <CCCC, <CC>;,.,;<CCCC>>''.;<>,,,. -CCCC;.``''.;<C>>''',<CCC>",
-\ "       <C;,CCCCC>.`C>'''''''  --<>;.``''<<<C;.`<<<CCCCCC>,;;<CCCCCCCC>;,",
-\ "     ,CCCCCCCCC>' . `<C>' .,,zc,`<CCCC, -;.``<<>;<CCCCCCCCCC>>''''''<>'",
-\ "    .<CCCCC''' zc$$$ccccc$$$$$$$h,.`<<C> <CCC;,,.``<`'CC>' .;<CCCCCC-",
-\ "     ,CCCC' ,c$$$$$$$$$$$$$$$$$$$$$$cc,.  `'<<CCCCCCCCC,,<C`<CCC>>'    .,.",
-\ "    ;CCCC' J$$$$$$$$$$$$$$$$$$$$$$$$$$$$$. `<>;,.```<<<<<CCC CC,.,,,;CC>'",
-\ " .;C><C> z$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$. .`'<<<>>;,, <CC CCCCCCCCCC,,.",
-\ "<C' `>   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$c CC>>;;, <C> CC,`CC>>'`'CCCCC",
-\ "' ;C>;> J$$$$$$$$$$$$$$$$$$$$$$$$$????????$$$.`C''''<><>', CC,.,;;C>'`<CCC",
-\ "  <CCC  $$$$$$$$$$$$$$$$$$$$$P\"  .,ccccccc$$$$. ,CCC>;,;<C,.``'''  ,<> .,'",
-\ " ,CCC .<$$$$$$$$$$$$$$$$$$$$\"  zJ$$$$$$$$$$$$$$c <CCCC`<CCCCCCCCC>,`CC'<'",
-\ ",CCC ; J$$$$$$$$$$$$$$$$$$$$,c$$??C????\"\"???$$$$hc`'>' ;.``<CC>>><C C> C>",
-\ "CC>>;C ?$$$$$???????$$$$$$$$$$$FJP\",c===\"   J$$$$$c ;, <CC> <C><\<> C>;CC;",
-\ ">  >' . $$P\".,,zzcc, \"$$$$$$$$$;\" ,.    $\" J$$$$$$$ <C> CCC <C < > <C `CCC",
-\ ";<CCCC .`$,J$$$PCCC>?<C$$$$$$$$L -??    ,c$$$$$$$$$c C',CC> <' C,,;>   `CC",
-\ "CCCC>',C ?$$CCJ?\"\"'_`,`\"$$$$$$$$$c,=cccd$$$$$$$$$$$$ C <C>  ,; C <>     `C",
-\ "CCCC;,> .`$$$\",==\"\"-.  c<$$$$$$$$$$JJJJC?$$$$$$$$$$$ < CC < CC C,`>      `",
-\ "CCCCCC;<C,`$F' .    `,JC:<$$$$$$$$$$$$$$$$$$$$$$$$$$>` <>-C CC,`C,`,.",
-\ "`<C>`'CCCC,`h.,..,,,c$3C>:3$$$$$$$$$$$$$$$$$$$$$$$$$$ < <,<><`C;.`, <> .",
-\ "    <C`<CC> $$$$$$$$$$$CC;<$$$$$$$$$$$$$$$$$$$$$$$$$$r`<;CCCCCCC>.' <> C;,",
-\ "  ;CCC. CC>-`$$$$$$$$$$$CC:$$$$$$$$$?$$$$$$$$$$$$$$$$$.`<'`<CCCC>',C' <CCC",
-\ "  <CC',<>',;.?$$$$$$$$$$C>;$$$$$9???-<$$$$$$$$$$$$$$$$$c,`-.``---''.,CCC>>",
-\ ",C'CCCC ;.`C> $$$$$$$$$$$>`$$$$$F<;,c$$$$$$$$$$$$$$$$$$$$L `C>>;;<CCCCCCCC",
-\ "C> CC>C,`C,`> `?$$$$$$$$$h;` `\"'.<$$$$$$$$$$$$$$$$$$$$$$$P . CCCCC,.;;.`''",
-\ "'  `C `C;CC,CC; \"$$$$$$$$$$$$$$$$<$$$$$$$$$$$$$$$$$$$$$$P' C,`CCCCCCCCCCCC",
-\ "    `C,.``<CCCCC, ?$$$$$$$$$$$????\"\"'\"\"\"\" J$$$$$$$$$$$$\" ..`C,C>`<<<<>>''<",
-\ "     `CCCC;.``<CC>.`$$$$$$$???     .,c=:c$$$$$$$$$$$$P',$'< CC'C;  <CCCC>;",
-\ "       <CCCCC>, `CC, \"$$$$$hcc,\"?C????JJ$$$$$$$$$$$$\",J$$ C CC <C . ``'',.",
-\ "          `C>`CC,`<CC, \"$$$$$$$$$$>;;??$$$$$$$$$$$P',$$$$ C CC> C,`C;. <CC",
-\ "         .,CC,`<C,,CCC .`?$$$$$$$$JJ$$$$$$$$$$$$P\",J$$$$F.>,CC><CC CCC> <C",
-\ "       ;C>'CCC>.`<'<CC $c, ?$$$$$$$$$$$$$$$$$$$\" c$$$$$$ <><C> <CC ``<C;.`",
-\ "      ,CC> `CCCCCCCCC',$$$h.`?$$$$$$$$$$$$$$$\" z$$$$$$$F;CC>',<CC>,C>.`<C;",
-\ "      <C> <>.`'''<>'  $$$$$$$c \"$$$$$$$$$??\".z$$$$$$$$$ `\".;<CCC> .`<C; CC",
-\ "      CC <CCC <C'<Cr J$$$$$$$$$c,``''\"\"'.zc$$$$$$$$$$$F;;CCCCC>' ;C, <CCCC",
-\ "     <CC C><C CC CCC $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ CCCC>' .c;`<C> C <C",
-\]
-let g:startify_custom_header = g:ascii
-let g:startify_list_order = ['files', 'bookmarks', 'sessions']
-let g:startify_files_number = 5
-
-
 " ==== Statusline / ALE ========================================================
 if has('statusline')
     set laststatus=2                " last window always has a status line
@@ -272,12 +180,6 @@ endif
 set statusline+=%#warningmsg#
 set statusline+=%*
 let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8'],
-\   'typescript': ['tsserver'],
-\}
-let g:ale_linters_ignore = {'typescript': ['tslint', 'eslint']}
 
 " ==== NERDTree ================================================================
 " enable line numbers
@@ -291,36 +193,3 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 set hidden
 let g:racer_cmd = "$HOME/.cargo/bin/racer"
-
-" ==== vim-cpp-enhanced-highlight ==============================================
-let g:cpp_class_scope_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-
-" ==== Goyo ====================================================================
-" We modify goyo to turn off our line-highlighting on entry.
-function! s:goyo_enter()
-    set noshowmode
-    set noshowcmd
-    set nocursorline
-    set scrolloff=999
-    Limelight
-endfunction
-
-function! s:goyo_leave()
-    set cursorline
-    set showcmd
-    set showmode
-    set scrolloff=5
-    Limelight!
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-" ==== vim-json ================================================================
-let g:vim_json_syntax_conceal = 0
-
-" ==== vim-prettier ============================================================
-" " number of spaces per indentation level
-" Prettier default: 2
-let g:prettier#config#tab_width = 4
